@@ -2,3 +2,6 @@
 A gnuplot library for C++!
 
 gplot-cpp is a library written in C++ to help users create gnuplot scripts from within their C++ code. Not only that, the library also generates a .pdf file with the output image (or any other output format for that matter, it's up to you to choose!). Below you'll find how to use and configure gplot-cpp.
+
+* Usage
+First things first: you need to decide wether you want to use the header and source files (gplot-cpp.h and gplot-cpp.cpp, respectively) or the header file and a static or dynamic library (gplot-cpp.a  or gplot-cpp.dylib, respectively).
