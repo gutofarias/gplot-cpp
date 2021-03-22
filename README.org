@@ -1,0 +1,2 @@
+* gplot-cpp
+A gnuplot library for C++!
