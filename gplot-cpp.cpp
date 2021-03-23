@@ -1,6 +1,6 @@
 //
-//  gnuplot.h
-//  gnuplot_cpp
+//  gplot-cpp.h
+//  gplot-cpp.cpp
 //
 //  Created by João Gutemberg Farias Filho on 20/03/15.
 //  Copyright (c) 2015 Joao Gutemberg. All rights reserved.
@@ -8,7 +8,7 @@
 
 
 
-#include "gnuplot.h"
+#include "gplot-cpp.h"
 
 
 /* -----------------------------------------------------------------------------------------*/
