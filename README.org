@@ -1,7 +1,18 @@
 * gplot-cpp
 A gnuplot library for C++!
 
-gplot-cpp is a library written in C++ to help users create (and execute) gnuplot scripts from within their C++ code. The library can also generate a .pdf file with LaTeX rendering as the output image (or any other output format for that matter, it's up to you to choose!). Below you'll find how to use and configure gplot-cpp.
+gplot-cpp is a library written in C++ to help users create (and execute) gnuplot scripts from within their C++ code. The library can also generate a .pdf file with LaTeX rendering as the output image (or any other output format for that matter, it's up to you to choose!). The library is implemented to work on Unix systems (MacOS and Linux) and on Windows. Below you'll find how to use and configure gplot-cpp. Also, we suggest you read the documentation for more details.
 
-* Usage
-First things first: you need to decide wether you want to use the header and source files (gplot-cpp.h and gplot-cpp.cpp, respectively) or the header file and a static or dynamic library (gplot-cpp.a  or gplot-cpp.dylib, respectively).
+* Setup
+First things first: you need to decide wether you want to use the header and source files (gplot-cpp.h and gplot-cpp.cpp, respectively) or the header file and a static or dynamic library (gplot-cpp.a  or gplot-cpp.dylib, respectively). Dynamic libraries with .dylib are for MacOS users, but you get the point. If you want to use the header and source files just put them inside your project directory and create a an object file (.o) so your linker has access to the definitions of the functions. This way, you'll be able to use the header and object files to get gplot-cpp running inside your project. Just as a reminder, here's how you'd create an object file in MacOS. If you want to do this using the Makefile file, just type "make obj".
+
+#+begin_src shell
+
+g++ -c gplot-cpp.cpp -I gplot-cpp.h -o gplot-cpp.o
+
+#+end_src
+
+Now, if you want to use the header file with either a static or dynamic library, you'll have to create the library (the Makefile can do that for you) and then move it to your machine's $PATH, that is, one of the directories it searches for libraries when compiling or executing a binary file. Luckly, the Makefile can also do that for you. If you don't know the difference between static and dynamic libraries I suggest you search about them a little bit. But, in a nutshell, static libraries are compiled with the rest of the code when creating a binary, thus adding up to the size of the binary. Dynamic libraries, on the other hand, are only loaded after you execute the binary, thus NOT increasing the its size. To find out how to do all these things, checkout the Makefile section below!
+
+** Makefile
+In order to generate an object file, and a static or dynamic library, you can use the Makefile in this repo. To do that, just type "make obj", "make static" or "make dynamic" in your shell. The default commands are for MacOS users, but if you use Linux or Windows, the commands are commented. So, just uncomment what you need and you're all set. Also, if you don't want to move the library to $PATH manually, there's also a command for that: "make move_to_path" will do the job. Similarly, it has commands for doing this in MacOS, Linux or Windows.
