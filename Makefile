@@ -21,8 +21,9 @@ static_move_to_path:
 
 
 dynamic_move_to_path:
-	sudo mv libgplot-cpp.dylib /usr/local/lib/libgplot-cpp.dylib
+	sudo mv libgplot-cpp.dylib /usr/local/lib/libgplot-cpp.dylib			# MacOS
+	#sudo mv libgplot-cpp.so /usr/local/lib/libgplot-cpp.so				# Linux
 
 
 include_move_to_path:
-	sudo mv gplot-cpp.h /usr/loca/include/gplot-cpp.h
+	sudo mv gplot-cpp.h /usr/loca/include/gplot-cpp.h				# MacOS or Linux
