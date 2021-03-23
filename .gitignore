@@ -1,0 +1,103 @@
+# Arquivo .gitignore para todos as extensões e arquivos indesejados no git
+
+
+# MacOS
+.DS_Store
+
+
+# Temporários
+*~
+.#*
+#*
+
+
+# Latex e Bibtex arquivos auxiliares
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+*.dvi
+*.xdv
+*-converted-to.*
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+
+# Arquivos da pasta auto (AUCTeX)
+auto/*
+**/auto
+
+
+# PDF's e outros tipos de imagens
+*.pdf
+*.png
+*.eps
+*.svg
+*.jpg
+*.jpeg
+
+
+# Executáveis e respectivos diretórios
+*.out
+bin/*
+
+
+# Bibliotecas estáticas e respectivos diretórios
+*.lib
+*.a
+lib/*
+
+
+# Bibliotecas dinâmicas e respectivos diretórios
+*.so
+*.dylib
+*.dll
+dylib/*
+
+
+# Object file e respectivos diretórios
+*.slo
+*.lo
+*.o
+*.obj
+obj/*
+
+
+# Versões de controle antigas
+**/versoes
+
+
+# Arquivos de texto que não comecem com "_"
+*.txt
+!_*.txt
+
+
+# Refêrencias criadas pelo clangd
+*.idx
+
+
+# Compile_commands utilizado pelo clangd/lsp-mode
+*.json
+
+
+# Arquivo que estejam em diretórios de "testes"
+**/teste
+**/testes
