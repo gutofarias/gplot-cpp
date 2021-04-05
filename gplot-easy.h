@@ -1,10 +1,13 @@
 //
-//  gnuplot.h
-//  gnuplot_cpp
+//  gplot-easy.h
 //
-//  Created by João Gutemberg Farias Filho on 20/03/15.
-//  Copyright (c) 2015 Joao Gutemberg. All rights reserved.
+//  Header/Source file of the library 'gplot'
+//  Made for the Easy Setup
 //
+//  Created by João Gutemberg Barbosa de Farias Filho
+//  See https://github.com/gutofarias/gplot
+//
+
 
 #ifndef gnuplot_cpp_gnuplot_h
 #define gnuplot_cpp_gnuplot_h
