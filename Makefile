@@ -1,29 +1,70 @@
 # -*- Makefile -*-
 
+
+NAME 	= gplot
+
+OBJ 	= ./obj
+LIB 	= ./lib
+DYLIB	= ./dylib
+BIN 	= ./bin
+OUTPUT	= ./output
+
+CC	= g++
+
+
+
+.PHONY: obj lib static-app static dylib dynamic-app dynamic run-static run-dynamic clean install uninstall
+
+
+
 obj:
-	g++ -c gplot-cpp.cpp -I gplot-cpp.h -o gplot-cpp.o				# MacOS or Linux 
+	mkdir -p $(OBJ)
+	$(CC) -c $(NAME).cpp -I . -o $(OBJ)/$(NAME).o
 
 
 lib:
-	ar -rcs libgnuplot-cpp.a gplot-cpp.o						# MacOS or Linux
+	mkdir -p $(LIB)
+	ar -rcs $(LIB)/lib$(NAME).a $(OBJ)/$(NAME).o
 
 
-static: obj lib
+static-app:
+	mkdir -p $(BIN)
+	$(CC) $(NAME)-test.cpp -l$(NAME) -L $(LIB) -I . -o $(BIN)/$(NAME)-test-static
 
 
-dynamic:
-	g++ -dynamiclib gplot-cpp.cpp -I gplot-cpp.h -o libgplot-cpp.dylib		# MacOS
-	#g++ -shared -fPIC gplot-cpp.cpp -I gplot-cpp.h -o libgplot-cpp.so		# Linux	
+static: obj lib static-app
 
 
-static_move_to_path:
-	sudo mv libgplot-cpp.a /usr/loca/lib/libgplot-cpp.a
+dylib:
+	mkdir -p $(DYLIB)
+	$(CC) -dynamiclib $(NAME).cpp -I . -o $(DYLIB)/lib$(NAME).dylib
 
 
-dynamic_move_to_path:
-	sudo mv libgplot-cpp.dylib /usr/local/lib/libgplot-cpp.dylib			# MacOS
-	#sudo mv libgplot-cpp.so /usr/local/lib/libgplot-cpp.so				# Linux
+dynamic-app:
+	mkdir -p $(BIN)
+	$(CC) $(NAME)-test.cpp $(DYLIB)/lib$(NAME).dylib -I . -o $(BIN)/$(NAME)-test-dynamic
 
 
-include_move_to_path:
-	sudo mv gplot-cpp.h /usr/loca/include/gplot-cpp.h				# MacOS or Linux
+dynamic: dylib dynamic-app
+
+
+run-static:
+	mkdir -p $(OUTPUT)
+	$(BIN)/$(NAME)-test-static
+
+
+run-dynamic:
+	mkdir -p $(OUTPUT)
+	$(BIN)/$(NAME)-test-dynamic
+
+
+clean:
+	rm -f $(OBJ)/* $(BIN)/* $(LIB)/* $(DYLIB)/* $(OUTPUT)/*
+
+
+install:
+	./install.sh $(NAME)
+
+
+uninstall:
+	./uninstall.sh $(NAME)
