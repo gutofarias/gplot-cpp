@@ -1,14 +1,14 @@
 //
-//  gplot-cpp.h
-//  gplot-cpp.cpp
+//  gplot.cpp
 //
-//  Created by João Gutemberg Farias Filho on 20/03/15.
-//  Copyright (c) 2015 Joao Gutemberg. All rights reserved.
+//  Source file of the library 'gplot'
+//
+//  Created by João Gutemberg Barbosa de Farias Filho
+//  See https://github.com/gutofarias/gplot
 //
 
 
-
-#include "gplot-cpp.h"
+#include "gplot.h"
 
 
 /* -----------------------------------------------------------------------------------------*/
