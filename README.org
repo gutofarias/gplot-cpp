@@ -1,26 +1,43 @@
-* gplot-cpp
+* gplot
 A gnuplot library for C++!
 
-gplot-cpp is a library written in C++ to help users create (and execute) gnuplot scripts from within their C++ code. The library can also generate a .pdf file with LaTeX rendering as the output image (or any other output format for that matter, it's up to you to choose!). The library is implemented to work on Unix systems (MacOS and Linux) and on Windows. Below you'll find how to use and configure gplot-cpp. Also, we suggest you read the documentation for more details.
+gplot is a library written in C++ to help users create (and execute) gnuplot scripts from within their C++ code. The library can also generate a .pdf file with LaTeX rendering as the output image (or any other output format for that matter, it's up to you to choose!). The library is implemented to work on Unix systems (MacOS and Linux) and on Windows. Below you'll find how to use and configure gplot. Also, we suggest you read the documentation for more details.
 
 * Easy Setup
-This setup is for those of you who don't want to go through the trouble of creating a library on your IDE or creating it manually on the command line. For that purpose, the gplot-cpp-easy.h file has both the declarations and the definitions of the variables and functions needed to run gplot-cpp. This way, you can just copy gplot-cpp-easy.h into your project's directory and include it in your main file and it'll work just fine (at least it's suposed to!).
+This setup is for those of you who don't want to go through the trouble of creating a library on your IDE or creating it manually on the command line. For that purpose, the gplot-easy.h file has both the declarations and the definitions of the variables and functions needed to run gplot. This way, you can just copy gplot-easy.h into your project's directory and include it in your main file and it'll work just fine (at least it's suposed to!).
 
 * IDE Setup
-As there are many IDE's out there to code in C++, I'll just suggest that you search how to create a library in your favorite IDE (you'll need both gplot-cpp.h and gplot-cpp.cpp files for that). After that, just link the created library to your project and you're good to go!
+As there are many IDE's out there to code in C++, I'll just suggest that you search how to create a library in your favorite IDE (you'll need both gplot.h and gplot.cpp files for that). After that, just link the created library to your project and you're good to go!
 
 * Manual Setup
-First things first: you need to decide wether you want to use the header and source files (gplot-cpp.h and gplot-cpp.cpp, respectively) or the header file and a static or dynamic library (gplot-cpp.a  or gplot-cpp.dylib, respectively). Dynamic libraries with .dylib are for MacOS users, but you get the point. If you want to use the header and source files just put them inside your project directory and create a an object file (.o) so your linker has access to the definitions of the functions. This way, you'll be able to use the header and object files to get gplot-cpp running inside your project. Just as a reminder, here's how you'd create an object file in MacOS. If you want to do this using the Makefile file, just type "make obj".
+First things first: you need to decide whether you want to use the header and source files (gplot.h and gplot.cpp, respectively) or the header file and a static or dynamic library (gplot.a  or gplot.dylib, respectively). Dynamic libraries with .dylib are for MacOS users, but you get the point. If you want to use the header and source files just put them inside your project directory and create a an object file (.o) so your linker has access to the definitions of the functions. This way, you'll be able to use the header and object files to get gplot running inside your project. Just as a reminder, here's how you'd create an object file in MacOS. If you want to do this using the Makefile file, just type "make obj".
 
 #+begin_src shell
 
-g++ -c gplot-cpp.cpp -I gplot-cpp.h -o gplot-cpp.o
+g++ -c gplot.cpp -I gplot.h -o gplot.o
 
 #+end_src
 
-Now, if you want to use the header file with either a static or dynamic library, you'll have to create the library (the Makefile can do that for you) and then move it to your machine's library search path, that is, one of the directories it searches for libraries when compiling or executing a binary file. Luckly, the Makefile can also do that for you. If you don't know the difference between static and dynamic libraries I suggest you search about them a little bit. But, in a nutshell, static libraries are compiled with the rest of the code when creating a binary, thus adding up to the size of the binary. Dynamic libraries, on the other hand, are only loaded after you execute the binary, thus NOT increasing its size. To find out how to do all these things, checkout the Makefile section below!
+Now, if you want to use the header file with either a static or dynamic library, you'll have to create the library (the Makefile can do that for you) and then move it to your machine's library search path, that is, one of the directories it searches for libraries when compiling or executing a binary file. Alternatively, you can create a directory to save your "personal" libraries, that is, libraries that are neither native to your computer nor installed by others apps. Then, pass the full path of the library anytime you need to use it. Luckly, the Makefile can do just that for you.
+
+If you don't know the difference between static and dynamic libraries I suggest you search about them a little bit. But, in a nutshell, static libraries are compiled with the rest of the code when creating a binary, thus adding up to the size of the binary. Dynamic libraries, on the other hand, are only loaded after you execute the binary (at execution time, known as /dependent libraries/, or at runtime, known as /dinamically loaded libraries/), thus NOT increasing its size. To find out how to do all these things, checkout the Makefile section below!
 
 ** Makefile
-In order to generate an object file and a static or dynamic library, you can use the Makefile in this repo. To do that, just type "make obj", "make static" or "make dynamic" in your shell. The default commands are for MacOS users, but if you use Linux, the commands are commented. So, just uncomment what you need and you're all set. Also, if you don't want to move the library to your library search path manually, there's also a command for that: "make static_move_to_path" or "make dynamic_move_to_path" will do the job. Similarly, it has commands for doing this in MacOS and Linux. Also, you may want to add the header file to your computer's include search path, instead of leaving it in your project's directory. To do this, use the "make include_move_to_path" command. Finally, in order to use the "move_to_path" commands in your Makefile, you have to enter sudo mode, that is, to have super user privileges. So, after you run the command, you'll have to enter your password.
+In order to generate an object file and a static or dynamic library, you can use the Makefile in this repo. To do that, just type "make obj", "make static" or "make dynamic" in your shell. The default commands are for MacOS users, but if you use Linux, the commands are pretty similar. So, just search what you need to do differently and you're all set. Also, to install or uninstall the library, use the "make install" or "make uninstall" commands, respectively. The default install path is "${HOME}/.include" and "${HOME}/.lib", but you can alter that in the install and uninstall shell scripts. You'll see that, after installing, the script changes the LC_ID_DYLIB of the dynamic library to match the new location. You can also move the library and header files to your machine's search path and, if configured correctly, it should work just fine. The standard paths are "/usr/include" and "/usr/local/include" for header files and "/usr/lib" and "/usr/local/lib" for libraries.
 
 Note: if you're a Windows user and don't use an IDE, I suggest you either try the Easy Setup or search how to create object files and static or dynamic libraries on Windows in order to implement this setup. 
+
+** Library Usage
+After installing the library, just make sure to include the header and library files when compiling the binary for your app, or when creating new libraries that have gplot as a dependency. Below you'll find how to include the header and library files when compiling binaries using static and dynamic libraries, respectively.
+
+#+begin_src shell
+
+g++ <app>.cpp -lgplot -L <path-to-lib> -I <path-to-header> -o <binary-name>
+
+#+end_src
+
+#+begin_src shell
+
+g++ <app>.cpp <path-to-lib>/libgplot.dylib -I <path-to-header> -o <binary-name>
+
+#+end_src
