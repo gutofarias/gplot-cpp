@@ -593,7 +593,7 @@ void exec_bundle_files (string *files_copy, int n_files_copy, string *files_move
 
     #if WINDOWS_OS
     #else
-    copy_files += folder_path;
+    copy_files += folder_path + "2>/dev/null";
     commands = popen(copy_files.c_str(), "r");
     pclose(commands);
     #endif
