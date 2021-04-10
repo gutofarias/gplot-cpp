@@ -99,5 +99,7 @@ obj/*
 
 
 # Arquivo que estejam em diretórios de "testes"
+**/test
+**/tests
 **/teste
 **/testes
